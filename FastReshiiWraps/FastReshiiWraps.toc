@@ -4,7 +4,7 @@
 ## Notes: Adds a minimap button to quickly open the specific Talent Tree (Reshii Wraps).
 ## Notes-ruRU: Добавляет кнопку на миникарту для быстрого открытия определенного дерева талантов (Reshii Wraps).
 ## Author: BloodDragon2580
-## Version: 1.1
+## Version: 1.2
 ## SavedVariables: FastReshiiWrapsDB
 ## IconTexture: Interface\AddOns\FastReshiiWraps\Media\Texture\logo
 
