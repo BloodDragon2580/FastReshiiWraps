@@ -1,10 +1,10 @@
-## Interface: 110205
+## Interface: 120000
 ## Title: |cffd6266cFast Reshii Wraps|r
 ## Title-ruRU: |cffd6266cБыстрые Повязки реши|r
 ## Notes: Adds a minimap button to quickly open the specific Talent Tree (Reshii Wraps).
 ## Notes-ruRU: Добавляет кнопку на миникарту для быстрого открытия определенного дерева талантов (Повязки реши).
 ## Author: BloodDragon2580
-## Version: 1.8
+## Version: 1.9
 ## SavedVariables: FastReshiiWrapsDB
 ## IconTexture: Interface\AddOns\FastReshiiWraps\Media\Texture\logo
 
