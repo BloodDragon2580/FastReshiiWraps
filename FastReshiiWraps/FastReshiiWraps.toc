@@ -1,4 +1,4 @@
-## Interface: 120000
+## Interface: 120001
 ## Title: |cffd6266cFast Reshii Wraps|r
 ## Title-ruRU: |cffd6266cБыстрые Повязки реши|r
 ## Notes: Adds a minimap button to quickly open the specific Talent Tree (Reshii Wraps).
