@@ -10,11 +10,54 @@ end
 
 -- Öffnet den Talentbaum
 local function openTalentTree()
-    C_AddOns.LoadAddOn("Blizzard_GenericTraitUI")
-    GenericTraitUI_LoadUI()
-    GenericTraitFrame:SetSystemID(29)
-    GenericTraitFrame:SetTreeID(1115)
-    ToggleFrame(GenericTraitFrame)
+    -- Hinweis: Blizzard ändert/entfernt gelegentlich UI-Methoden. Seit einigen Builds
+    -- kann GenericTraitFrame:SetSystemID() fehlen -> dann würde das Addon hart crashen.
+    -- Wir fangen das ab und geben eine verständliche Meldung aus.
+
+    if C_AddOns and C_AddOns.LoadAddOn then
+        C_AddOns.LoadAddOn("Blizzard_GenericTraitUI")
+    end
+    if type(GenericTraitUI_LoadUI) == "function" then
+        GenericTraitUI_LoadUI()
+    end
+
+    local frame = _G and _G.GenericTraitFrame
+    if not frame then
+        print("|cffff5555FRW:|r GenericTraitFrame nicht gefunden. Öffne die Reshii-Wraps UI bitte über den NPC (Hashim in K'aresh).")
+        return
+    end
+
+    -- Reshii Wraps IDs
+    local systemID = 29
+    local treeID = 1115
+
+    -- Manche Builds erlauben weiterhin SetTreeID, aber nicht SetSystemID (oder umgekehrt).
+    -- Wir versuchen in sicherer Reihenfolge und brechen sauber ab.
+    local ok, err
+
+    if type(frame.SetSystemID) == "function" then
+        ok, err = pcall(frame.SetSystemID, frame, systemID)
+    else
+        ok = false
+        err = "SetSystemID missing"
+    end
+
+    if ok and type(frame.SetTreeID) == "function" then
+        ok, err = pcall(frame.SetTreeID, frame, treeID)
+    end
+
+    if ok then
+        ToggleFrame(frame)
+        return
+    end
+
+    -- Fallback: Wenn Blizzard die Remote-Öffnung blockt oder Methoden umbenannt wurden,
+    -- wollen wir nicht crashten, sondern einen Hinweis geben.
+    print("|cffff5555FRW:|r Konnte die Reshii-Wraps UI nicht direkt öffnen (Blizzard-API geändert/gesperrt). Bitte über den NPC (Hashim in K'aresh) öffnen.")
+    if err then
+        -- optional für Debugging
+        print("|cff999999FRW Debug:|r " .. tostring(err))
+    end
 end
 
 local function ToggleMinimapButton()
